@@ -1,7 +1,84 @@
-//questions
+
+(function(){
+  function buildQuiz(){
+    // Variable to store the HTML output
+    const output = [];
+
+    // For each question...
+    myQuestions.forEach(
+      (currentQuestion, questionNumber) => {
+
+        // Variable to store the list of possible answers
+        const answers = [];
+
+        // For each available answer...
+        for(letter in currentQuestion.answers){
+
+          // Add an HTML radio button
+          answers.push(
+            `<label>
+              <input type="radio" name="question${questionNumber}" value="${letter}">
+              ${letter} :
+              ${currentQuestion.answers[letter]}
+            </label>`
+          );
+        }
+
+        // Add this question and its answers to the output
+        output.push(
+          `<div class="question"> ${currentQuestion.question} </div>
+          <div class="answers"> ${answers.join('')} </div>`
+        );
+      }
+    );
+
+    // Combine our output list into one string of HTML and put it on the page
+    quizContainer.innerHTML = output.join('');
+  }
+
+  function showResults(){
+
+    // Gather answer containers from our quiz
+    const answerContainers = quizContainer.querySelectorAll('.answers');
+
+    // Keep track of user's answers
+    let numCorrect = 0;
+
+    // For each question
+    myQuestions.forEach( (currentQuestion, questionNumber) => {
+
+      // Find selected answer
+      const answerContainer = answerContainers[questionNumber];
+      const selector = `input[name=question${questionNumber}]:checked`;
+      const userAnswer = (answerContainer.querySelector(selector) || {}).value;
+
+      // If answer is correct
+      if(userAnswer === currentQuestion.correctAnswer){
+        // Add to the number of correct answers
+        numCorrect++;
+
+        // Colors the answers green
+        answerContainers[questionNumber].style.color = 'lightgreen';
+      }
+      // If answer is wrong or blank
+      else{
+        // Color the answers red
+        answerContainers[questionNumber].style.color = 'red';
+      }
+    });
+
+    // Show number of correct answers out of total
+    resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
+  }
+
+  const quizContainer = document.getElementById('quiz');
+  const resultsContainer = document.getElementById('results');
+  const submitButton = document.getElementById('submit');
+
+//Questions
 const myQuestions = [
     {
-      question: "Who invented Football (Ameican)?",
+      question: "Who invented Football (American)?",
       answers: {
         a: "Walter Camp",
         b: "Ron Rivera",
@@ -29,105 +106,3 @@ const myQuestions = [
       correctAnswer: "d"
     }
   ];
-  
-  myQuestions.forEach( (currentQuestion, questionNumber) => {
-    // the code we want to run for each question goes here
-  });
-
-// we'll want to store the list of answer choices
-const answers = [];
-
-// and for each available answer...
-for(letter in currentQuestion.answers){
-
-  // ...add an html radio button
-  answers.push(
-    `<label>
-      <input type="radio" name="question${questionNumber}" value="${letter}">
-      ${letter} :
-      ${currentQuestion.answers[letter]}
-    </label>`
-  );
-}
-
-// add this question and its answers to the output
-output.push(
-  `<div class="question"> ${currentQuestion.question} </div>
-  <div class="answers"> ${answers.join('')} </div>`
-);
-
-// const quizContainer = document.getElementById('quiz');
-// const resultsContainer = document.getElementById('results');
-// const submitButton = document.getElementById('submit');
-// var books=[
-//     {
-// title:"Bone",
-// Author:"Jeff Smith",
-// alreadyRead:true
-//     },
-//     {
-// title:"Amulet",
-// author:"Kazu Kibuishi",
-// alreadyRead:true
-//     },
-//     {
-// title:"Amulet #9",
-// author:"Kazu Kibuishi",
-// alreadyRead:false
-//     }
-// ];
-// for(i=0; i<books.length; i++){
-// var book=books[i];
-// var bookInfo= book.title + " by " + book.author;
-// if(book.alreadyRead){
-//     document.write("You read " + bookInfo + "<br>")
-// }
-// else{
-//     document.write("You still need to read " + bookInfo);
-// }
-// };
-// var recipe = {
-//     name: "Tacos",
-//     amount: 5,
-//     ingredients: ["Tortilla", "Beef", "Onion", "coriander", "Salsa"],
-//     isGood: true,
-// }
-// console.log("My favorite recipe is " + recipe.name);
-// console.log("This feeds " + recipe.amount);
-// console.log("The ingredients are " + recipe.ingredients);
-// console.log("The tacos are good wh" + recipe.isGood);
-
-// //strings, numbers, arrays, booleans, functions(methods)
-// //creating objects: 
-// //Object literal
-// var sibling={
-//     name:"Lendy",
-//     age:19,
-//     brothers: ["Tony", "Marvin"],
-//     isSingle: false,
-//     email: "Lendy@gmail.com"
-// }
-// //object constructor
-// var sibling = new Object();
-// sibling.name="Lendy";
-// sibling.age=19;
-// sibling.brothers=["Tony", "Marvin"];
-// sibling.isSingle=false;
-// sibling.email="lendy@gmail.com";
-// //Passing strings arguments
-// function meetSibling(){
-//     console.log("My name is " + sibling.name);
-// }
-// meetSibling(sibling);
-
-// //accesories dot notation
-// document.write("My name is " + sibling.name + " I am " + sibling.age + " years old" + "<br>");
-// //brakect notstiom
-// document.write("My name is " + sibling["name"] + " my email is " + sibling["email"]);
-// //see all keys/values in aa object
-// //for in loop iterating onject data
-// for (key in sibling) {
-//     document.write(key);
-// }
-// document.write(Object.keys(sibling));
-// document.write (Object.values(sibling));
