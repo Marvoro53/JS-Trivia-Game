@@ -1,5 +1,5 @@
-//questions
-const myQuestions = [
+
+  const myQuestions = [
     {
       question: "Who invented Football (Ameican)?",
       answers: {
@@ -7,7 +7,7 @@ const myQuestions = [
         b: "Ron Rivera",
         c: "Pete Carroll"
       },
-      correctAnswer: "c"
+      correctAnswer: "a"
     },
     {
       question: "What team won 3 Super Bowls in the 1990's?",
@@ -29,32 +29,12 @@ const myQuestions = [
       correctAnswer: "d"
     }
   ];
-  
-  myQuestions.forEach( (currentQuestion, questionNumber) => {
-    // the code we want to run for each question goes here
-  });
+  // Kick things off
+  buildQuiz();
 
-// we'll want to store the list of answer choices
-const answers = [];
-
-// and for each available answer...
-for(letter in currentQuestion.answers){
-
-  // ...add an html radio button
-  answers.push(
-    `<label>
-      <input type="radio" name="question${questionNumber}" value="${letter}">
-      ${letter} :
-      ${currentQuestion.answers[letter]}
-    </label>`
-  );
-}
-
-// add this question and its answers to the output
-output.push(
-  `<div class="question"> ${currentQuestion.question} </div>
-  <div class="answers"> ${answers.join('')} </div>`
-);
+//   // Event listeners
+//   submitButton.addEventListener('click', showResults);
+// })();
 
 // const quizContainer = document.getElementById('quiz');
 // const resultsContainer = document.getElementById('results');
