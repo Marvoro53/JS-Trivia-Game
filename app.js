@@ -80,9 +80,9 @@ const myQuestions = [
     {
       question: "Who invented Football (American)?",
       answers: {
-        a: "Walter Camp",
+        a: "Pete Caroll",
         b: "Ron Rivera",
-        c: "Pete Carroll"
+        c: "Walter Camp"
       },
       correctAnswer: "c"
     },
@@ -90,10 +90,10 @@ const myQuestions = [
       question: "What team won 3 Super Bowls in the 1990's?",
       answers: {
         a: "Steelers",
-        b: "Patriots",
-        c: "Broncos"
+        b: "Broncos",
+        c: "Patriots"
       },
-      correctAnswer: "c"
+      correctAnswer: "b"
     },
     {
       question: "Who was the couch that lead the Broncos to first Super Bowl?",
@@ -106,3 +106,9 @@ const myQuestions = [
       correctAnswer: "d"
     }
   ];
+
+  buildQuiz();
+
+  // Event listeners
+  submitButton.addEventListener('click', showResults);
+})();
